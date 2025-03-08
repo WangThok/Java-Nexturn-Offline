@@ -10,7 +10,6 @@ class Employee {
     }
 }
 
-// Ticket class
 class Ticket {
     int id;
     String name;
@@ -29,7 +28,6 @@ class Ticket {
     }
 }
 
-// HelpDesk class
 class HelpDesk {
     Employee emp1, emp2;
     Ticket t1, t2, t3, t4, t5;
@@ -57,14 +55,12 @@ class HelpDesk {
         Employee emp = null;
         Ticket ticket = null;
 
-        // Find the employee based on the name
         if (emp1 != null && emp1.fullName.equals(employeeName)) {
             emp = emp1;
         } else if (emp2 != null && emp2.fullName.equals(employeeName)) {
             emp = emp2;
         }
 
-        // Find the ticket based on the ID
         switch (ticketId) {
             case 101: ticket = t1; break;
             case 102: ticket = t2; break;
@@ -88,7 +84,6 @@ class HelpDesk {
         }
     }
 
-    // Method to count the number of incomplete tickets
     public int getWaitingTicketCount() {
         int count = 0;
         if (t1 != null && !t1.isCompleted) count++;
@@ -99,7 +94,6 @@ class HelpDesk {
         return count;
     }
 
-    // Method to get the total points of completed tickets
     public int getCompletedTicketsTotalPoint() {
         int totalPoints = 0;
         if (t1 != null && t1.isCompleted) totalPoints += t1.point;
@@ -115,13 +109,11 @@ public class HelpdeskMS {
     public static void main(String[] args) {
         HelpDesk helpDesk = new HelpDesk();
 
-        // Adding Employees
         Employee alice = new Employee("Alice Brown", 5, Category.SOFTWARE);
         Employee bob = new Employee("Bob Smith", 8, Category.HARDWARE);
         helpDesk.addEmployee(alice, 1);
         helpDesk.addEmployee(bob, 2);
 
-        // Adding Tickets
         Ticket t1 = new Ticket(101, "Software Bug", Category.SOFTWARE, 4);
         Ticket t2 = new Ticket(102, "Network Issue", Category.HARDWARE, 7);
         Ticket t3 = new Ticket(103, "System Crash", Category.HARDWARE, 10);
@@ -133,14 +125,12 @@ public class HelpdeskMS {
         helpDesk.addTicket(t4, 4);
         helpDesk.addTicket(t5, 5);
 
-        // Completing Tickets
         helpDesk.completeTicket("Alice Brown", 101); // Success
         helpDesk.completeTicket("Bob Smith", 102); // Success
         helpDesk.completeTicket("Alice Brown", 103); // Failed (Insufficient points)
         helpDesk.completeTicket("Bob Smith", 104); // Success
         helpDesk.completeTicket("Alice Brown", 105); // Success
 
-        // Output Queries
         System.out.println("Waiting tickets count: " + helpDesk.getWaitingTicketCount()); // Expected Output: 2
         System.out.println("Completed tickets total points: " + helpDesk.getCompletedTicketsTotalPoint()); // Expected Output: 16
     }
